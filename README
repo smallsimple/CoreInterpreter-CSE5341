@@ -1,0 +1,26 @@
+/* Bobo Shi      CSE3341/5341  Project part2 */
+
+*the name of the files in this lab*
+
+**All the source codes for each class and the main.cpp**
+Assign.cpp    DeclSeq.cpp   IdList.cpp    Loop.cpp      Stmt.cpp
+Assign.h      DeclSeq.h     IdList.h      Loop.h        Stmt.h
+Comp.cpp      Expr.cpp      Ifc.cpp       Op.cpp        StmtSeq.cpp
+Comp.h        Expr.h        Ifc.h         Op.h          StmtSeq.h
+Cond.cpp      Fac.cpp       Input.cpp     Output.cpp    Tokenizer.cpp
+Cond.h        Fac.h         Input.h       Output.h      Tokenizer.h
+Decl.cpp      Id.cpp        Inte.cpp      Prog.cpp      main.cpp
+Decl.h        Id.h          Inte.h        Prog.h
+
+main.cpp contains the main() function. Other files is the class for each node in abstract parse tree.
+
+**Also there is a makefile called:**
+makefile
+
+**Test files are:**
+input1  input2  input3  input4  program1  program2  program3  program4 ....
+
+**How to compile and exectue**
+type "make" in the folder then an executable file "Interpreter" will be produced.
+type "Interpreter program1 input1" to execute 'program1' using 'input1' as input.
+
