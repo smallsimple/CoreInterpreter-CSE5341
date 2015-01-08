@@ -1,0 +1,115 @@
+/* Bobo Shi     CSE3341/5341       Project   part2 */
+
+1. Design of the interpreter:
+I used Object-Oriented approach. Each node is treated as a separate independent object. Each non-terminal has a separate class.
+
+Most of the class contains three functions: Print, Execute and Parse. Some classes contains other functions. For example, Id class contains DeclId(), GetIdVal(), SetIdVal(), ReadId(), WriteId(). Those extra function is for special statement propose. For instances, DeclId() is for <decl> and ReadId() is for <in>. 
+
+Tokenizer class is made as a singleton class. It provides a method getInstance() that returns the only Tokenizer class. Function skipToken() in tokenizer class is used to skip token, if all the tokens has been skiped, calling skipToken() will get a warning message saying that "Warning: End of the file! There are no tokens!". getToken() function in Tokenizer class is used to get token. If all the tokens has been skiped, calling getToken() will get an error message saying that: "Error: End of the file! There are no tokens!", but the program will not terminated.
+
+The parse function of each class gets the tokenizer class and reads each token and parses it. Parse function will check if the syntax is right. If the syntax is not right, Error message will be put to standard output stream and program will exit. 
+
+Id class has static eIds[20] and static ParseId() function. Whenever ParseId() function is called, it will first search through the existing eIds[20]. If the name matches eIds[k], return eIds[k]. If doesn't match, Id* nId = new Id(n1). 
+
+2. user manual
+To use the interpreter, follow the syntax of NBF in slides 18 and 19. Before use, type "make" to compiler the codes. Then "Interpreter" will be produced. You should provide Core program and input data for that program. For example, if the core program is called "program1" and input data for the core program is called "input1", you should be able to run the program by saying:
+> Interpreter program1 input1
+where ">" is the Unix prompt. 
+
+Interpreter will first print out the program in a pretty nice look version. Then the output will be printed if you have "write" statement in the core program. 
+
+3. Something to mention
+3.1 This program need input data file. If you don't have input data file, program will give a warning "Warning: input file not assigned! Might be a problem." but the program will not terminated. This is in case core program doesn't have a "read" statement. If input dat is not provided and core program has read statement, an error message will be printed:"Error: no input file is assigned." and the program will be terminated.
+3.2 Tokenizer class will check if the each token is illegal. If token is illegal, program will be terminated and will not exectue ProgPrint function and ExecProg function. If all the tokens are legal but there is syntax error in the core program. Parse fuction in each class will detect it and program will be terminated. Also ProgPrint and ExecProg will not be executed. If Parse is passed, usually ProgPrint and ExecProg will be executed but do not exclude some segmentation error when ExecProg is executed. 
+
+4. Test
+I have several test programs and inputs.The following are some examples.
+
+4.1 Interpreter program1 input1
+==========Pretty Printed Core Program==========
+program
+	int X, Y, Z;
+begin
+	X = 4;
+	Y = 5;
+	read Z;
+	write Z;
+	while (X<Y) loop
+		X = X + 1;
+	end;
+	write X, Y;
+end
+====================OUTPUT=====================
+Z = 5
+X = 5
+Y = 5
+
+4.2 Interpreter program2 input2
+==========Pretty Printed Core Program==========
+program
+	int A, B, C;
+begin
+	read A, B, C;
+	write A, B, C;
+	if (A<B) then
+		A = A + B;
+		C = A + B;
+	end;
+	write A, B, C;
+end
+====================OUTPUT=====================
+A = -10
+B = 2
+C = 3
+A = -8
+B = 2
+C = -6
+
+4.3 Interpreter program3 input3 // This core program has syntax error!
+Warning: has reached the end-of-file!
+Syntax Error: ParseIfc: ";" not found or not in the right place.
+program stopped.
+
+4.4  Interpreter program4 // I didn't have input file here!
+Warning: input file not assigned! Might be a problem.
+==========Pretty Printed Core Program==========
+program
+	int X, Y, Z;
+begin
+	X = 4;
+	Y = 5;
+	read Z;
+	write Z;
+	while (X<Y) loop
+		X = X + 1;
+	end;
+end
+====================OUTPUT=====================
+Error: no input file is assigned.
+program stopped.
+
+4.5 Interpreter program8
+Warning: input file not assigned! Might be a problem.
+==========Pretty Printed Core Program==========
+program
+	int A, B, C;
+begin
+	A = 1;
+	B = 2;
+	if [ ( A != B ) && ( A <= B ) ] then
+		write A, B;
+	end;
+	C = A + B + B;
+	write C;
+	C = C * C * A + B * A;
+	write C;
+	C = ( A + B ) * B + ( A * ( A + B ) + B ) * B;
+	write C;
+end
+====================OUTPUT=====================
+A = 1
+B = 2
+C = 5
+C = 27
+C = 16
+

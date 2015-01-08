@@ -1,0 +1,11 @@
+program
+	int A, B, C;
+begin
+	read A, B, C;
+	write A, B, C;
+	if (A < B) then
+	   A = A + B;
+	   C = A + B;
+	end;
+	write A, B, C;
+end

@@ -1,0 +1,15 @@
+program 
+	int A, B, C;
+begin	
+	A = 1; B = 2;
+	if [(A !=B ) && ( A <= B)] then
+		write A, B;
+	end;
+	C = A + B + B;
+	write C;
+	C = C * C * A + B * A;
+	write C;
+	C = ( A + B ) * B + ( A * (A + B ) + B) * B;
+	write C;
+	
+end

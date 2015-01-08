@@ -1,0 +1,10 @@
+   program
+       int X, Y;
+       int A, B;
+       begin
+        A = 1;
+	while ( A < 10) loop
+	  A = A + 1;
+	  end;
+       write A;
+       end

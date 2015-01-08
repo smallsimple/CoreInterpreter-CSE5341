@@ -1,0 +1,10 @@
+program 
+	int X, Y, Z;
+	
+begin
+	X=4; Y=5;
+	read Z; write Z;
+	while (X<Y) loop
+		X = X +1;
+	end;
+end
